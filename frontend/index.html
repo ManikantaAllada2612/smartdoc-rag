@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartDoc RAG</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>SmartDoc RAG</h1>
+        <p>Document Question-Answering System</p>
+    </header>
+
+    <main class="container">
+
+        <section class="card">
+            <h2>Upload Document</h2>
+
+            <form id="upload-form">
+
+                <input
+                    type="file"
+                    id="file-input"
+                    accept=".pdf,.txt,.md"
+                    required
+                >
+
+                <button type="submit">
+                    Upload & Index
+                </button>
+
+            </form>
+
+            <p id="upload-status"></p>
+        </section>
+
+
+        <section class="card">
+
+            <h2>Ask a Question</h2>
+
+            <textarea
+                id="question"
+                placeholder="Ask something about your documents..."
+            ></textarea>
+
+            <div class="controls">
+
+                <label>
+                    Retrieval Strategy:
+
+                    <select id="strategy">
+                        <option value="hybrid">Hybrid</option>
+                        <option value="vector">Vector</option>
+                        <option value="keyword">Keyword</option>
+                    </select>
+                </label>
+
+                <label>
+                    Top-K:
+
+                    <input
+                        type="number"
+                        id="top-k"
+                        value="5"
+                        min="1"
+                        max="20"
+                    >
+                </label>
+
+            </div>
+
+            <button id="ask-button">
+                Ask
+            </button>
+
+            <p id="query-status"></p>
+
+        </section>
+
+
+        <section
+            class="card result-card"
+            id="result-section"
+            hidden
+        >
+
+            <h2>Answer</h2>
+
+            <div id="answer"></div>
+
+            <button
+                id="details-button"
+                type="button"
+            >
+                View Details
+            </button>
+
+
+            <div id="details" hidden>
+
+                <div class="metrics">
+
+                    <div>
+                        <strong>Confidence</strong>
+                        <span id="confidence"></span>
+                    </div>
+
+                    <div>
+                        <strong>Grounded</strong>
+                        <span id="grounded"></span>
+                    </div>
+
+                    <div>
+                        <strong>Latency</strong>
+                        <span id="latency"></span>
+                    </div>
+
+                    <div>
+                        <strong>Strategy</strong>
+                        <span id="result-strategy"></span>
+                    </div>
+
+                </div>
+
+
+                <h3>Sources</h3>
+
+                <ul id="sources"></ul>
+
+
+                <h3>Retrieved Chunks</h3>
+
+                <div id="chunks"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>

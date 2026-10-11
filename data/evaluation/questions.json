@@ -1,0 +1,142 @@
+[
+  {
+    "question": "What is SmartDoc?",
+    "expected_answers": [
+      "SmartDoc is an evaluated document question-answering system built using Retrieval-Augmented Generation (RAG)."
+    ],
+    "relevant_chunk_ids": ["test.txt-1"]
+  },
+  {
+    "question": "What document formats can users upload to SmartDoc?",
+    "expected_answers": [
+      "Users can upload PDF, TXT, and Markdown documents."
+    ],
+    "relevant_chunk_ids": ["test.txt-1"]
+  },
+  {
+    "question": "What happens during document ingestion?",
+    "expected_answers": [
+      "During document ingestion, the system loads the document, cleans the text, and divides it into smaller chunks."
+    ],
+    "relevant_chunk_ids": ["test.txt-1"]
+  },
+  {
+    "question": "What information is stored as metadata for each chunk?",
+    "expected_answers": [
+      "Each chunk has a unique chunk ID and metadata such as the source document and page number when available."
+    ],
+    "relevant_chunk_ids": ["test.txt-1"]
+  },
+  {
+    "question": "What retrieval strategies does SmartDoc support?",
+    "expected_answers": [
+      "SmartDoc supports vector retrieval, keyword retrieval, and hybrid retrieval."
+    ],
+    "relevant_chunk_ids": ["test.txt-1"]
+  },
+  {
+    "question": "How does vector retrieval work?",
+    "expected_answers": [
+      "Vector retrieval converts the question and document chunks into embeddings and finds semantically similar chunks."
+    ],
+    "relevant_chunk_ids": ["test.txt-1"]
+  },
+  {
+    "question": "How does keyword retrieval work?",
+    "expected_answers": [
+      "Keyword retrieval searches for important words shared between the question and document chunks."
+    ],
+    "relevant_chunk_ids": ["test.txt-1", "test.txt-2"]
+  },
+  {
+    "question": "What does hybrid retrieval do?",
+    "expected_answers": [
+      "Hybrid retrieval combines vector and keyword retrieval to improve the chances of finding relevant information."
+    ],
+    "relevant_chunk_ids": ["test.txt-2"]
+  },
+  {
+    "question": "What is provided to the language model after retrieval?",
+    "expected_answers": [
+      "The selected chunks are provided to the language model as context for generating the answer."
+    ],
+    "relevant_chunk_ids": ["test.txt-2"]
+  },
+  {
+    "question": "What instruction is given to the language model about answering questions?",
+    "expected_answers": [
+      "The language model is instructed to answer only from the retrieved context and not invent information."
+    ],
+    "relevant_chunk_ids": ["test.txt-2"]
+  },
+  {
+    "question": "Why does the system record the chunk IDs used to generate an answer?",
+    "expected_answers": [
+      "The system records which retrieved chunks were used so that the answer can be traced back to evidence."
+    ],
+    "relevant_chunk_ids": ["test.txt-2"]
+  },
+  {
+    "question": "What does SmartDoc use to calculate a confidence score?",
+    "expected_answers": [
+      "SmartDoc calculates a confidence score based on the available evidence and validity of the cited chunks."
+    ],
+    "relevant_chunk_ids": ["test.txt-2"]
+  },
+  {
+    "question": "What does the grounding check determine?",
+    "expected_answers": [
+      "The system checks whether the generated answer is grounded in the retrieved document content."
+    ],
+    "relevant_chunk_ids": ["test.txt-2", "test.txt-3"]
+  },
+  {
+    "question": "What information can the application show for every answer?",
+    "expected_answers": [
+      "The application can show the answer, confidence, grounding status, retrieval strategy, sources, and retrieved chunks."
+    ],
+    "relevant_chunk_ids": ["test.txt-3"]
+  },
+  {
+    "question": "Which metrics are used to measure retrieval quality?",
+    "expected_answers": [
+      "The evaluation system measures retrieval quality using Hit@K, Precision@K, and Recall@K."
+    ],
+    "relevant_chunk_ids": ["test.txt-3"]
+  },
+  {
+    "question": "Which metrics are used for answer evaluation?",
+    "expected_answers": [
+      "Answer evaluation includes token F1, correctness, faithfulness, and relevance scores from an LLM judge."
+    ],
+    "relevant_chunk_ids": ["test.txt-3"]
+  },
+  {
+    "question": "Why does the evaluation process record latency?",
+    "expected_answers": [
+      "The evaluation process records latency so different retrieval strategies can be compared."
+    ],
+    "relevant_chunk_ids": ["test.txt-3"]
+  },
+  {
+    "question": "What does the SmartDoc REST API use?",
+    "expected_answers": [
+      "The application provides a REST API using FastAPI for document upload, document listing, question answering, and evaluation results."
+    ],
+    "relevant_chunk_ids": ["test.txt-3"]
+  },
+  {
+    "question": "What technologies are used to build the SmartDoc frontend?",
+    "expected_answers": [
+      "The frontend is built using HTML, CSS, and JavaScript and communicates with the backend through REST API endpoints."
+    ],
+    "relevant_chunk_ids": ["test.txt-3", "test.txt-4"]
+  },
+  {
+    "question": "What is the goal of SmartDoc?",
+    "expected_answers": [
+      "The goal of SmartDoc is to provide answers that are useful, traceable, grounded in documents, and measurable through evaluation."
+    ],
+    "relevant_chunk_ids": ["test.txt-4"]
+  }
+]

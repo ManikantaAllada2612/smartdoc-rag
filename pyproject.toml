@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smartdoc-rag"
+version = "0.1.0"
+description = "An evaluated document question-answering system using RAG"
+requires-python = ">=3.13"
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
+    "python-dotenv",
+    "pydantic",
+    "pypdf",
+    "langchain-core",
+    "langchain-text-splitters",
+    "langchain-groq",
+    "sentence-transformers",
+    "chromadb",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

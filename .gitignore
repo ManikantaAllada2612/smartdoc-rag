@@ -1,0 +1,45 @@
+```gitignore
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Chroma vector database
+data/chroma/
+
+# Uploaded documents (keep the sample text file)
+data/documents/*
+!data/documents/test.txt
+
+# Generated evaluation results and logs
+data/evaluation/results*.json
+*.log
+
+# PDF documents
+*.pdf
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+```
+# Generated package metadata
+src/*.egg-info/

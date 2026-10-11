@@ -1,0 +1,41 @@
+SmartDoc Project Guide
+
+SmartDoc is an evaluated document question-answering system built using Retrieval-Augmented Generation (RAG).
+
+The system allows users to upload PDF, TXT, and Markdown documents and ask questions about their content.
+
+During document ingestion, the system loads the document, cleans the text, and divides it into smaller chunks.
+
+Each chunk receives a unique chunk ID and metadata such as the source document and page number when available.
+
+SmartDoc supports three retrieval strategies: vector retrieval, keyword retrieval, and hybrid retrieval.
+
+Vector retrieval converts the question and document chunks into embeddings and finds semantically similar chunks.
+
+Keyword retrieval searches for important words shared between the question and document chunks.
+
+Hybrid retrieval combines vector and keyword retrieval to improve the chances of finding relevant information.
+
+After retrieval, the selected chunks are provided to the language model as context for generating the answer.
+
+The language model is instructed to answer only from the retrieved context and not invent information.
+
+The system records which retrieved chunks were used to generate the answer so that the answer can be traced back to evidence.
+
+SmartDoc calculates a confidence score based on the available evidence and validity of the cited chunks.
+
+The system also checks whether the generated answer is grounded in the retrieved document content.
+
+For every answer, the application can show the answer, confidence, grounding status, retrieval strategy, sources, and retrieved chunks.
+
+The evaluation system measures retrieval quality using Hit@K, Precision@K, and Recall@K.
+
+Answer evaluation includes token F1 as well as correctness, faithfulness, and relevance scores from an LLM judge.
+
+The evaluation process also records latency so different retrieval strategies can be compared.
+
+The application provides a REST API using FastAPI for document upload, document listing, question answering, and evaluation results.
+
+The frontend is built using HTML, CSS, and JavaScript and communicates with the backend through REST API endpoints.
+
+The goal of SmartDoc is to provide answers that are useful, traceable, grounded in documents, and measurable through evaluation.
