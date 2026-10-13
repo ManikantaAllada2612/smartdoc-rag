@@ -21,9 +21,6 @@ class Retriever:
         # Hybrid shares the same keyword retriever instead of building its own.
         self.hybrid_retriever = HybridRetriever(vector_store, self.keyword_retriever)
 
-    def refresh(self) -> None:
-        """Reload the keyword index from Chroma. Call after indexing a document."""
-        self.keyword_retriever.update(self.vector_store.get_all_documents())
 
     def search(self, query: str, top_k: int = 5) -> list[tuple[Document, float]]:
         """Return (chunk, score) pairs using the selected strategy."""

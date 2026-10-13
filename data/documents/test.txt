@@ -1,41 +1,21 @@
-SmartDoc Project Guide
+SmartDoc is an evaluated document question-answering system built using Retrieval-Augmented Generation (RAG). Its goal is to provide useful answers that are traceable, grounded in documents, and measurable through evaluation.
 
-SmartDoc is an evaluated document question-answering system built using Retrieval-Augmented Generation (RAG).
+Users can upload PDF, TXT, and Markdown documents. During document ingestion, the system loads the document, cleans the text, and divides it into smaller chunks. The default chunk size is 800 characters with an overlap of 120 characters. Overlap helps preserve context between neighboring chunks.
 
-The system allows users to upload PDF, TXT, and Markdown documents and ask questions about their content.
+Each chunk has a unique chunk ID and metadata such as the source document and page number when available. The system converts document chunks into numerical embeddings using the sentence-transformers/all-MiniLM-L6-v2 model. ChromaDB stores the chunk text, embeddings, and metadata for persistent retrieval.
 
-During document ingestion, the system loads the document, cleans the text, and divides it into smaller chunks.
+SmartDoc supports three retrieval strategies: vector retrieval, keyword retrieval, and hybrid retrieval. Vector retrieval converts the question and document chunks into embeddings and finds semantically similar chunks. Keyword retrieval searches for important words shared between the question and document chunks. Hybrid retrieval combines vector and keyword retrieval using normalized scores and configurable weights.
 
-Each chunk receives a unique chunk ID and metadata such as the source document and page number when available.
+After retrieval, the selected chunks are provided to the language model as context for generating an answer. The language model is instructed to answer only from the retrieved context and not invent information. SmartDoc uses Groq with the configured openai/gpt-oss-20b model for answer generation and structured output.
 
-SmartDoc supports three retrieval strategies: vector retrieval, keyword retrieval, and hybrid retrieval.
+The system records the chunk IDs used to generate an answer so that the answer can be traced back to evidence. The grounding component checks whether cited chunk IDs exist among the retrieved chunks, builds source references, and estimates answer support using text overlap. The confidence score is a heuristic based on answer support and citation validity; it is not a calibrated probability or a guarantee of factual correctness.
 
-Vector retrieval converts the question and document chunks into embeddings and finds semantically similar chunks.
-
-Keyword retrieval searches for important words shared between the question and document chunks.
-
-Hybrid retrieval combines vector and keyword retrieval to improve the chances of finding relevant information.
-
-After retrieval, the selected chunks are provided to the language model as context for generating the answer.
-
-The language model is instructed to answer only from the retrieved context and not invent information.
-
-The system records which retrieved chunks were used to generate the answer so that the answer can be traced back to evidence.
-
-SmartDoc calculates a confidence score based on the available evidence and validity of the cited chunks.
-
-The system also checks whether the generated answer is grounded in the retrieved document content.
-
-For every answer, the application can show the answer, confidence, grounding status, retrieval strategy, sources, and retrieved chunks.
-
-The evaluation system measures retrieval quality using Hit@K, Precision@K, and Recall@K.
-
-Answer evaluation includes token F1 as well as correctness, faithfulness, and relevance scores from an LLM judge.
-
-The evaluation process also records latency so different retrieval strategies can be compared.
-
-The application provides a REST API using FastAPI for document upload, document listing, question answering, and evaluation results.
+The application can show the answer, confidence, grounding status, retrieval strategy, sources, and retrieved chunks. It provides a REST API using FastAPI for document upload, document listing, question answering, and evaluation results.
 
 The frontend is built using HTML, CSS, and JavaScript and communicates with the backend through REST API endpoints.
 
-The goal of SmartDoc is to provide answers that are useful, traceable, grounded in documents, and measurable through evaluation.
+The evaluation system compares vector, keyword, and hybrid retrieval. It measures retrieval quality using Hit@K, Precision@K, and Recall@K. Hit@K checks whether at least one relevant chunk appears in the top K results. Precision@K measures the proportion of retrieved chunks that are relevant. Recall@K measures the proportion of relevant chunks that were retrieved. The evaluation process also records latency so different retrieval strategies can be compared.
+
+Answer evaluation may include token F1, correctness, faithfulness, and relevance scores from an LLM judge, depending on the configured evaluation implementation.
+
+The overall goal of SmartDoc is to provide document-based answers that are useful, traceable, grounded in retrieved evidence, and measurable through systematic evaluation.

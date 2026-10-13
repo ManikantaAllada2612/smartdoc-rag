@@ -105,7 +105,17 @@ async def upload_document(file: UploadFile = File(...)):
             detail=str(error),
         ) from error
 
+   
     except Exception as error:
+        if destination.exists():
+            try:
+                destination.unlink()
+            except OSError:
+                logger.exception(
+                    "Could not remove failed upload: %s",
+                    filename,
+                )
+
         logger.exception("Document indexing failed: %s", filename)
 
         raise HTTPException(
